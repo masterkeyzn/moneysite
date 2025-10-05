@@ -103,14 +103,11 @@ class ApiTransactions extends Controller
     {
         $endpoint = '/user/transfer';
 
-        $payload = ['user_code' => $userCode];
-
-        if (! $amount === null) {
-            $payload['amount'] = -$amount;
-        }
-
         return self::formatResponse(
-            self::sendRequest($endpoint, $payload)
+            self::sendRequest($endpoint, [
+                'user_code' => $userCode,
+                'amount'    => $amount,
+            ])
         );
     }
 
