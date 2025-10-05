@@ -106,7 +106,7 @@ class ApiTransactions extends Controller
         return self::formatResponse(
             self::sendRequest($endpoint, [
                 'user_code' => $userCode,
-                'amount'    => $amount,
+                'amount'    => -$amount,
             ])
         );
     }
