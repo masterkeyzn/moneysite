@@ -307,11 +307,11 @@ class AuthController extends Controller
 
         $response = ApiTransactions::withdraw($user->player_token, $amount);
 
-        if ($response['success'] != '1') {
+        if (! $response['data']['success'] ?? false) {
             return back()->with(['status' => 'error', 'message' => 'Transaction could not be processed.'], 302);
         }
 
-        $user->active_balance = $response['data']['user_balance'];
+        $user->active_balance = $response['data']['balance'];
         $user->save();
 
         $transaction = Transaction::create([
